@@ -1,0 +1,37 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.io3storageaccessframework.MainActivity">
+
+    <item
+        android:id="@+id/reset_directory"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Reset Directory"/>
+    <item
+        android:id="@+id/select_directory"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        android:title="Select Directory"/>
+    <item
+        android:id="@+id/get_bitmap"
+        android:orderInCategory="102"
+        app:showAsAction="never"
+        android:title="Get Bitmap"/>
+    <item
+        android:id="@+id/save_image"
+        android:orderInCategory="103"
+        app:showAsAction="never"
+        android:title="Save Image"/>
+    <item
+        android:id="@+id/delete_image"
+        android:orderInCategory="104"
+        app:showAsAction="never"
+        android:title="Delete Image"/>
+    <item
+        android:id="@+id/reset_bitmap"
+        android:orderInCategory="105"
+        app:showAsAction="never"
+        android:title="Reset Bitmap"/>
+
+</menu>
