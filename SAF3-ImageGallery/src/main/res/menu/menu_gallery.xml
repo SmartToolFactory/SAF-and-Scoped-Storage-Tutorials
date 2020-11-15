@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.io3storageaccessframework.MainActivity">
+
+    <item
+        android:id="@+id/menu_option_reset_dir"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Reset Directory"/>
+    <item
+        android:id="@+id/menu_option_select_dir"
+        android:orderInCategory="101"
+        app:showAsAction="never"
+        android:title="Select Directory"/>
+
+</menu>

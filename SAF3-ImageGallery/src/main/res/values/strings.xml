@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_publisher" translatable="false">Smart Tool Factory</string>
+    <string name="app_name" translatable="false">Gallery</string>
+    <string name="email_address" translatable="false">smarttoolfactory@gmail.com</string>
+    <string name="export_yes" translatable="false">Yes</string>
+    <string name="export_no" translatable="false">No</string>
+    <string name="key_image_save_uri" translatable="false">key_image_path_uri</string>
+</resources>

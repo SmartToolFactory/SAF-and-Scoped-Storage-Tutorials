@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?><!-- Root layout is RelativeLayout to add Admob -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rlGalleryPreview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#60656d">
+
+    <com.smarttoolfactory.saf3_imagegallery.libs.gallery.view.TouchImageView
+        android:id="@+id/touchImageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:visibility="visible" />
+
+</RelativeLayout>

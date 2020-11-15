@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedAttribute">
+
+    <item
+        android:id="@+id/menu_option_ok"
+        android:icon="@drawable/ic_baseline_done_24"
+        android:orderInCategory="101"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_option_edit"
+        android:icon="@drawable/ic_baseline_create_24"
+        android:orderInCategory="102"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_option_delete"
+        android:icon="@drawable/ic_baseline_delete_forever_24"
+        android:orderInCategory="103"
+        android:title=""
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_option_share"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:orderInCategory="104"
+        android:title=""
+        app:showAsAction="always" />
+
+</menu>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- *** Gallery Preview *** -->
+    <string name="gallery">Gallery</string>
+    <string name="gallery_menu_delete_image">Delete Image</string>
+    <string name="gallery_menu_delete_image_message">Caution! This action cannot be undone!</string>
+    <string name="gallery_file_not_available">File is not available!</string>
+    <string name="gallery_file_deleted">File is deleted!</string>
+    <string name="gallery_file_not_deleted">File could not be deleted!</string>
+    <!-- *** Gallery Details *** -->
+    <string name="gallery_image">Image</string>
+    <string name="gallery_path">Path</string>
+    <string name="gallery_captured_time">Captured time</string>
+    <string name="gallery_orientation">Orientation</string>
+    <string name="gallery_camera">Camera</string>
+    <string name="gallery_camera_maker">Camera maker</string>
+    <string name="gallery_unknown">Unknown</string>
+    <string name="gallery_camera_model">Camera model</string>
+    <string name="gallery_software">Software</string>
+    <string name="gallery_advanced">Advanced</string>
+    <string name="gallery_focal_length">Focal length</string>
+    <string name="gallery_aperture">Aperture</string>
+    <string name="gallery_exposure_time">Exposure time</string>
+    <string name="gallery_iso_speed">ISO speed</string>
+    <string name="gallery_user">User</string>
+    <string name="gallery_artist">Artist</string>
+    <string name="gallery_copyright">Copyright</string>
+    <string name="gallery_description">Description</string>
+    <string name="gallery_comment">Comment</string>
+    <string name="gallery_undefined">Undefined</string>
+    <string name="gallery_horizontal_normal">Horizontal(Normal)</string>
+    <string name="gallery_rotate90cw">Rotate 90 CW</string>
+    <string name="gallery_rotate180cw">Rotate 180 CW</string>
+    <string name="gallery_mirror_horizontal">Mirror Horizontal</string>
+    <string name="gallery_mirror_vertical">Mirror Vertical</string>
+    <string name="gallery_mirror_horizontal_90">Mirror horizontal and rotate 90 CW</string>
+    <string name="gallery_mirror_horizontal_270">Mirror horizontal and rotate 270 CW</string>
+
+</resources>
