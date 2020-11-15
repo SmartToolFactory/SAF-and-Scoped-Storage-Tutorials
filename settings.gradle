@@ -1,3 +1,4 @@
 rootProject.name = "Storage Access Framework Tutorials"
 include ':app'
 include ':SAF1-Directories'
+include ':SAF2-SubDirsandListFiles'

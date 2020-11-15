@@ -7,7 +7,7 @@ android {
     compileSdkVersion 30
 
     defaultConfig {
-        applicationId "com.smarttoolfactory.saf1_directories"
+        applicationId "com.smarttoolfactory.saf2_subdirsandlistfiles"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
