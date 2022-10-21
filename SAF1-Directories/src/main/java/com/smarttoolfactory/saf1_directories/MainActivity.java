@@ -1,8 +1,11 @@
 package com.smarttoolfactory.saf1_directories;
 
+import static com.smarttoolfactory.saf1_directories.permissions.PermissionsUtilsKt.requestWriteExternalPermission;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -18,6 +21,7 @@ import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.provider.DocumentsContract;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,12 +30,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.documentfile.provider.DocumentFile;
 
 import com.smarttoolfactory.saf1_directories.fileutils.FileUtils;
-import com.smarttoolfactory.saf1_directories.permissions.PermissionsUtils;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -74,42 +81,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Check R/W permission
-        if (ActivityCompat.checkSelfPermission(MainActivity.this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(MainActivity.this, "Permission to write is required", Toast.LENGTH_LONG).show();
-            PermissionsUtils.requestWriteExternalPermission(MainActivity.this);
-        }
-
-        /**
-         *  ********* EXTERNAL STORAGE CHECK *********
-         */
-//        // Displays External Directory and SD Cards
-//        File[] dirs = getExternalFilesDirs(null);
-//        for (File file : dirs) {
-//            String path = file.getPath().split("/Android")[0];
-//            System.out.println("Dir: " + path + "\n");
-//
-//            try {
-//                File fileTmp = new File(path, "file.tmp");
-//                boolean isFileCreated = fileTmp.createNewFile();
-//                System.out.println("File " + fileTmp.toString() + ", isCreated: " + isFileCreated + "\n");
-//                System.out.println("File " + fileTmp.toString() + ", isDirectory: " + fileTmp.isDirectory()
-//                        + ", isFile: " + fileTmp.isFile() + "\n");
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                System.out.println("Error: " + e.getMessage() + "\n");
-//            }
-//
-//        }
-//
-//        String[] paths = FileUtils.getExternalStorageDirectories(MainActivity.this);
-//
-//        for (String path : paths) {
-//            System.out.println("path: " + path + "\n");
-//        }
-        // ********* EXTERNAL STORAGE CHECK *********
-
         tvSAF1 = (TextView) findViewById(R.id.tvSAF1);
         tvSAF2 = (TextView) findViewById(R.id.tvSAF2);
         tvSAF3 = (TextView) findViewById(R.id.tvSAF3);
@@ -117,6 +88,43 @@ public class MainActivity extends AppCompatActivity {
         ivSAF = (ImageView) findViewById(R.id.ivSAF);
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+
+
+        // Check R/W permission
+        if (ActivityCompat.checkSelfPermission(MainActivity.this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(MainActivity.this, "Permission to write is required", Toast.LENGTH_LONG).show();
+            requestWriteExternalPermission(MainActivity.this);
+        }
+
+        /**
+         *  ********* EXTERNAL STORAGE CHECK *********
+         */
+        // Displays External Directory and SD Cards
+        File[] dirs = getExternalFilesDirs(null);
+        for (File file : dirs) {
+            String path = file.getPath().split("/Android")[0];
+            System.out.println("Dir: " + path + "\n");
+
+            try {
+                File fileTmp = new File(path, "file.tmp");
+                boolean isFileCreated = fileTmp.createNewFile();
+                System.out.println("File " + fileTmp.toString() + ", isCreated: " + isFileCreated + "\n");
+                System.out.println("File " + fileTmp.toString() + ", isDirectory: " + fileTmp.isDirectory()
+                        + ", isFile: " + fileTmp.isFile() + "\n");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error: " + e.getMessage() + "\n");
+            }
+
+        }
+
+        String[] paths = FileUtils.getExternalStorageDirectories(MainActivity.this);
+
+        for (String path : paths) {
+            System.out.println("path: " + path + "\n");
+        }
+        // ********* EXTERNAL STORAGE CHECK *********
 
         File mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "");
 
@@ -132,9 +140,9 @@ public class MainActivity extends AppCompatActivity {
         // Don't create file using File Uri: file:///
         File file = new File(currentFolder);
 
-        // Returns Uri with file:///storage/emulated/0 for main device memory
-        // DocumentFile documentFile =
-        // DocumentFile.fromFile(Environment.getExternalStorageDirectory());
+        // Returns Uri with file:///storage/emulated/0 for main device memory 🔥 BAD
+        DocumentFile documentFile0 =
+                DocumentFile.fromFile(Environment.getExternalStorageDirectory());
         /**
          * Returns with SAF->
          * file:///content:com.android.externalstorage.documents/tree/primary Returns
@@ -171,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         tvSAF1.setText("onCreate() URI Parsed toString: " + Uri.parse(currentFolder).toString());
-        tvSAF2.setText("onCreate() file.getAbsolutePath(): " + file.getAbsolutePath()+ ", exists: " + file.exists() + ", canWrite: " + file.canWrite());
+        tvSAF2.setText("onCreate() file.getAbsolutePath(): " + file.getAbsolutePath() + ", exists: " + file.exists() + ", canWrite: " + file.canWrite());
         tvSAF3.setText("onCreate() currentFolder: " + currentFolder);
 
         // !!! Works only with valid content Uri content://
@@ -188,9 +196,30 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Toast.makeText(MainActivity.this, "Current Folder: " + currentFolder, Toast.LENGTH_LONG).show();
-        Toast.makeText(MainActivity.this, "Current Folder is from Uri?: " + currentFolder.contains("content://"),
-                Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this, "Current Folder: " + currentFolder, Toast.LENGTH_LONG).show();
+//        Toast.makeText(MainActivity.this, "Current Folder is from Uri?: " + currentFolder.contains("content://"),
+//                Toast.LENGTH_LONG).show();
+
+
+        try {
+            ContentValues values = new ContentValues();
+
+            values.put(MediaStore.MediaColumns.DISPLAY_NAME, "menuCategory");       //file name
+            values.put(MediaStore.MediaColumns.MIME_TYPE, "text/plain");        //file extension, will automatically add to file
+            values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOCUMENTS + "/Kamen Rider Decade/");     //end "/" is not mandatory
+
+            Uri uri = getContentResolver().insert(MediaStore.Files.getContentUri("external"), values);      //important!
+
+            OutputStream outputStream = getContentResolver().openOutputStream(uri);
+
+            outputStream.write("This is menu category data.".getBytes());
+
+            outputStream.close();
+
+            Toast.makeText(getApplicationContext(), "File created successfully", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Fail to create file", Toast.LENGTH_SHORT).show();
+        }
 
     }
 
@@ -353,11 +382,11 @@ public class MainActivity extends AppCompatActivity {
         currentFolder = saveDir.getUri().toString();
         saveCurrentFolderToPrefs();
 
-		/*
+        /*
          * TODO Write permission is enabled for directories previously created on DEVICE
-		 * Or you can create a direct child of externalStorageDirectory(main) directory
-		 * Main/Folder1 is permitted, Main/Folder1/FolderSub1 is not permitted
-		 */
+         * Or you can create a direct child of externalStorageDirectory(main) directory
+         * Main/Folder1 is permitted, Main/Folder1/FolderSub1 is not permitted
+         */
 
         if (saveDir != null && saveDir.exists() && saveDir.canWrite()) {
             try {
@@ -443,7 +472,7 @@ public class MainActivity extends AppCompatActivity {
         DocumentFile newDir = null;
         /*
          * Check or create Main Folder
-		 */
+         */
 
         // Check if main folder exist
         newDir = saveDir.findFile(DIR_MAIN);
@@ -460,7 +489,7 @@ public class MainActivity extends AppCompatActivity {
         }
         /*
          * Check or create Sub-Folder
-		 */
+         */
         DocumentFile newSubDir = null;
 
         // Check if sub-folder exist
@@ -528,7 +557,6 @@ public class MainActivity extends AppCompatActivity {
             System.out.println("deleteImage() imageToDelete.lastModified(): " + new Date(imageToDelete.lastModified()));
             isImageDeleted = imageToDelete.delete();
             System.out.println("deleteImage() imageToDelete.delete(): " + isImageDeleted);
-
 
 
         }
@@ -606,7 +634,6 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.reset_bitmap:
                 /**
-
                  * This is for checking for absolute path retrieved from FileUtils methods
                  */
                 File fileBitmapPath = new File(lastSavedImagePath);
@@ -618,7 +645,6 @@ public class MainActivity extends AppCompatActivity {
 
         return true;
     }
-
 
 
     @Override
