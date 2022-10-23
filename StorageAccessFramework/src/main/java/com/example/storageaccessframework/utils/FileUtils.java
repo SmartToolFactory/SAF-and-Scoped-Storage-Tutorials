@@ -1,4 +1,4 @@
-package com.example.storageaccessframework.fileutils;
+package com.example.storageaccessframework.utils;
 
 import android.content.ContentUris;
 import android.content.Context;
