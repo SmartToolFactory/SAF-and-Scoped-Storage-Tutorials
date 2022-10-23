@@ -27,6 +27,7 @@ public class GalleryUtils {
 	// method to get images
 	public static List<GalleryItem> getImages(Context context) {
 		// Columns to be retreived
+
 		final String[] projection = { MediaStore.Images.Media.DISPLAY_NAME, MediaStore.Images.Media.DATA };
 		// Select projection WHERE selection (id = ?) == selectionArgs
 		final String selection = MediaStore.Images.Media.BUCKET_ID + " = ?";

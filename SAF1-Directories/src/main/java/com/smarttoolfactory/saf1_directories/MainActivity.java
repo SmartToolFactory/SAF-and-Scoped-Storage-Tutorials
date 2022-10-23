@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity {
             boolean isDocUri = DocumentsContract.isDocumentUri(MainActivity.this, uri);
             boolean isTreeUri = DocumentsContract.isTreeUri(uri);
             System.out.println("onCreate() Uri " + uri.toString() + ", isDocUri: " + isDocUri + ", isTreeUri: " + isTreeUri);
-            tvSAF3.setText("onCreate() DocumentsContract buildDocumentUriUsingTree Uri: " + uri.toString());
+            tvSAF3.setText("onCreate() DocumentsContract buildDocumentUriUsingTree Uri: " + uri);
         } catch (NullPointerException | IllegalArgumentException e) {
             Toast.makeText(getApplicationContext(), "Exception " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
