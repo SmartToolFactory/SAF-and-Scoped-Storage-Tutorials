@@ -12,7 +12,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -32,10 +31,6 @@ import com.example.storageaccessframework.utils.FileUtils
 import com.example.storageaccessframework.ui.theme.StorageAccessFrameworkTutorialsTheme
 import com.example.storageaccessframework.utils.RequestFileReadWritePermission
 import com.example.storageaccessframework.utils.getCurrentFolder
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.PermissionStatus
-import com.google.accompanist.permissions.rememberPermissionState
-import com.google.accompanist.permissions.shouldShowRationale
 import java.io.File
 
 internal const val KEY_CURRENT_FOLDER = "PATH"
@@ -164,8 +159,6 @@ private fun SAFExample() {
                     }
                 }
             )
-
-
         },
         content = {
             Column(
